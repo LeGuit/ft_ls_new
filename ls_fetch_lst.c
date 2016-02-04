@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 18:43:24 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/04 18:59:05 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/04 19:10:59 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ void				sort_merge_lst(t_dlst *head, t_info *info)
 		dlst_merge_sort(head, cmp_lexi);
 }
 
-static void			ft_save(char *dirname, t_node *node, t_dlst *headdir,
-							t_dlst *headfile)
+static void			ft_save(char *dirname, t_node *node, t_dlst *head)
 {
 	if (!(node->path = (char *)malloc(sizeof(char) * 
 					((ft_strlen(dirname)
@@ -32,27 +31,34 @@ static void			ft_save(char *dirname, t_node *node, t_dlst *headdir,
 	ft_strcpy(node->path, dirname);
 	ft_strcat(node->path, "/");
 	ft_strcat(node->path, node->namtyp.d_name);	   
-	if (lstat(dirname, &node->statfile) == -1)
+	if (lstat(node->path, &node->statfile) == -1)
 		perror("ft_ls stat error: ");
-	if (node->namtyp.d_type == DT_DIR && ft_strcmp(".", node->namtyp.d_name)
-			&& ft_strcmp("..", node->namtyp.d_name))
-		dlst_add_tail(&node->dlst, headdir);
-	dlst_add_tail(&node->dlst, headfile);
+	dlst_add_tail(&node->dlst, head);
 }
 
 void				ft_fetch_lst(DIR *dirp, char *filename, t_dlst *headfile,
 		t_dlst *headdir)
 {
-	t_node			*node;
+	t_node			*nodefile;
+	t_node			*nodedir;
 	struct dirent	*tmp;
 
 	while ((tmp = readdir(dirp)))
 	{
 		if (tmp->d_name[0] == '.' && !GET(C_NODE(t_info, headfile)->opt, OPT_A))
 			continue ;
-		if (!(node = (t_node *)malloc(sizeof(t_node))))
+		if (!(nodefile = (t_node *)malloc(sizeof(t_node))))
 			exit(0);
-		node->namtyp = *tmp;
-		ft_save(filename, node, headdir, headfile);
+		if (!(nodedir = (t_node *)malloc(sizeof(t_node))))
+			exit(0);
+		nodefile->namtyp = *tmp;
+		if (nodedir->namtyp.d_type == DT_DIR
+				&& ft_strcmp(".", nodedir->namtyp.d_name)
+				&& ft_strcmp("..", nodedir->namtyp.d_name))
+		{
+			nodedir->namtyp = *tmp;
+			ft_save(filename, nodedir, headdir);
+		}
+		ft_save(filename, nodefile, headfile);
 	}
 }
