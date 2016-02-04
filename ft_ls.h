@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 13:10:11 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/04 17:00:40 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/04 19:25:41 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void				ft_size(t_info *info);
 void				ft_padding(t_info *info);
 void				ft_exit_parse(char illopt);
 void				ft_error_dir(void);
+void				ft_error_malloc(void);
 void				print_files(t_info *info);
 void				print_stat(t_node *file, t_info *info);
 void				print_filename(t_node *tmp, t_info *info);

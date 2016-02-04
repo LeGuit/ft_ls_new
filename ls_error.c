@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 18:20:19 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/04 14:43:09 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/04 19:25:20 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,10 @@ void			ft_exit_parse(char illopt)
 void			ft_error_dir(void)
 {
 	perror("ft_ls: ");
+}
+
+void			ft_error_malloc(void)
+{
+	perror("ft_ls: ");
+	exit(0);
 }

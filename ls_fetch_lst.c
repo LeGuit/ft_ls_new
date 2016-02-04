@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 18:43:24 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/04 19:10:59 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/04 19:26:20 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void			ft_save(char *dirname, t_node *node, t_dlst *head)
 	if (!(node->path = (char *)malloc(sizeof(char) * 
 					((ft_strlen(dirname)
 					  + ft_strlen(node->namtyp.d_name) + 2)))))
-		exit(0);
+		ft_error_malloc();
 	ft_strcpy(node->path, dirname);
 	ft_strcat(node->path, "/");
 	ft_strcat(node->path, node->namtyp.d_name);	   
@@ -48,14 +48,14 @@ void				ft_fetch_lst(DIR *dirp, char *filename, t_dlst *headfile,
 		if (tmp->d_name[0] == '.' && !GET(C_NODE(t_info, headfile)->opt, OPT_A))
 			continue ;
 		if (!(nodefile = (t_node *)malloc(sizeof(t_node))))
-			exit(0);
-		if (!(nodedir = (t_node *)malloc(sizeof(t_node))))
-			exit(0);
+			ft_error_malloc();
 		nodefile->namtyp = *tmp;
-		if (nodedir->namtyp.d_type == DT_DIR
-				&& ft_strcmp(".", nodedir->namtyp.d_name)
-				&& ft_strcmp("..", nodedir->namtyp.d_name))
+		if (nodefile->namtyp.d_type == DT_DIR
+				&& ft_strcmp(".", nodefile->namtyp.d_name)
+				&& ft_strcmp("..", nodefile->namtyp.d_name))
 		{
+			if (!(nodedir = (t_node *)malloc(sizeof(t_node))))
+				ft_error_malloc();
 			nodedir->namtyp = *tmp;
 			ft_save(filename, nodedir, headdir);
 		}
