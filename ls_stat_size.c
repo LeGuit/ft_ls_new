@@ -6,16 +6,16 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 11:35:39 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/04 17:21:07 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/04 20:24:00 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 #include "libft/includes/libft.h"
 
-static int		size_nb(int nb)
+static int			size_nb(int nb)
 {
-	int			i;
+	int				i;
 
 	i = 0;
 	while (nb)
@@ -26,7 +26,7 @@ static int		size_nb(int nb)
 	return (i);
 }
 
-static void		ft_size_minmajoct(t_info *info)
+static void			ft_size_minmajoct(t_info *info)
 {
 	if ((int)info->maxoct < info->maxmaj + info->maxmin)
 		info->maxoct = info->maxmin + info->maxmaj + 2;
@@ -34,10 +34,35 @@ static void		ft_size_minmajoct(t_info *info)
 		info->maxmaj += (info->maxoct - (info->maxmaj + info->maxmin));
 }
 
-void			ft_size(t_info *info)
+static int			ft_size_uid(uuid_t uuid)
 {
-	t_node		*tmp;
-	t_dlst		*it;
+	struct passwd	*getuid;
+
+	if (!(getuid = getpwuid(uuid)))
+	{
+		perror("ft_ls: ")
+		return (0);
+	}
+	return (ft_strlen(getuid->pw_name));
+}
+
+static int			ft_size_gid(gid_t gid)
+{
+	struct group	*getgid;
+
+	if (!(getuid = getgrgid(gid)))
+	{
+		perror("ft_ls: ")
+		return (0);
+	}
+	return (ft_strlen(getgid->pw_name));
+}
+
+void				ft_size(t_info *info)
+{
+	t_node			*tmp;
+	t_dlst			*it;
+	int				sizeguid;
 
 	if (!GET(info->opt, OPT_L))
 		return ;
@@ -48,10 +73,10 @@ void			ft_size(t_info *info)
 		info->total += tmp->statfile.st_blocks;
 		info->maxlink = MAX(info->maxlink, (size_t)tmp->statfile.st_nlink);
 		info->maxoct = MAX(info->maxoct, (size_t)tmp->statfile.st_size);
-		info->maxusr = MAX(info->maxusr,
-				ft_strlen(getpwuid(tmp->statfile.st_uid)->pw_name));
-		info->maxgrp = MAX(info->maxgrp,
-				ft_strlen(getgrgid(tmp->statfile.st_gid)->gr_name));
+		sizeguid = ft_size_uid(tmp->statfile->st_uid)
+		info->maxusr = MAX(info->maxusr, sizeguid);
+		sizeguid = ft_size_gid(tmp->statfile->st_gid);
+		info->maxgrp = MAX(info->maxgrp, sizeguid);
 		info->maxmaj = MAX(info->maxmaj, MAJOR(tmp->statfile.st_rdev));
 		info->maxmin = MAX(info->maxmin, MINOR(tmp->statfile.st_rdev));
 		it = it->next;
