@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 18:17:02 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/04 17:36:41 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/04 18:02:28 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void			print_dir(t_dlst *headdir)
 	it = headdir->next;
 	while (it != headdir)
 	{
-		ft_printf("Dirname in headdir: %s\n", C_NODE(t_node, it)->namtyp.d_name);
-		ft_printf("Dirpath in headdir: %s\n", C_NODE(t_node, it)->path);
+		ft_printf("name: %s\n", C_NODE(t_node, it)->namtyp.d_name);
+		ft_printf("path: %s\n", C_NODE(t_node, it)->path);
 		it = it->next;
 	}
 }
