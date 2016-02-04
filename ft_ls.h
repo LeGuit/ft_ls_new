@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 13:10:11 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/04 19:25:41 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/04 19:27:54 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ typedef	struct		s_node
 	char			*path;
 	struct dirent	namtyp;
 	struct stat		statfile;
-	char			color[9];
-	char			background[9];
 }					t_node;
 
 void				ft_get_dir(char *filename, t_info *info);

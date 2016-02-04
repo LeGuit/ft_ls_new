@@ -6,12 +6,12 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 11:52:34 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/04 17:22:08 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/04 19:30:16 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
+/*
 void			get_color(t_info *info, t_node *node)
 {
 	ft_strcpy(node->color, C_RES);
@@ -39,7 +39,7 @@ void			get_color(t_info *info, t_node *node)
 	else if (S_ISBLK(node->statfile.st_mode))
 		ft_strcpy(node->background, C_BLU);
 }
-
+*/
 void			reset_max_info(t_info *info)
 {
 	info->maxlink = 0;
