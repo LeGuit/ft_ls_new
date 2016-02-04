@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 16:16:16 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/04 19:17:02 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/04 19:43:30 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,16 @@ void				ft_get_dir(char *filename, t_info *info)
 	dlst_init(&headdir);
 	if (!(dirp = opendir(filename)))
 		ft_error_dir();
-	ft_fetch_lst(dirp, filename, &info->headfile, &headdir);
-	closedir(dirp);
-	ft_size(info);
-	sort_merge_lst(&info->headfile, info);
-	sort_merge_lst(&headdir, info);
-	print_files(info);
-	clear_head(&info->headfile);
-	ls_recurs(info, &headdir);
-	clear_head(&headdir);
+	else
+	{
+		ft_fetch_lst(dirp, filename, &info->headfile, &headdir);
+		closedir(dirp);
+		ft_size(info);
+		sort_merge_lst(&info->headfile, info);
+		sort_merge_lst(&headdir, info);
+		print_files(info);
+		clear_head(&info->headfile);
+		ls_recurs(info, &headdir);
+		clear_head(&headdir);
+	}
 }
