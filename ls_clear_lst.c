@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 18:48:13 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/04 19:29:38 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/05 11:50:12 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ void				clear_head(t_dlst *head)
 	{
 		tmp = C_NODE(t_node, it);
 		free(tmp->path);
-		free(tmp);
 		dlst_del_entry(it);
+		free(tmp);
 		it = head->next;
 	}
+	dlst_init(head);
 }

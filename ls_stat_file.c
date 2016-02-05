@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 11:35:16 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/04 18:58:50 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/05 12:19:52 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void		print_time(struct stat statfile)
 	ptrctime = ctime(&statfile.st_mtimespec.tv_sec);
 	time(&ltime);
 	if ((MAX(ltime, statfile.st_mtimespec.tv_sec)
-			- MIN(ltime, statfile.st_mtimespec.tv_sec)) < 1552000)
+				- MIN(ltime, statfile.st_mtimespec.tv_sec)) < 1552000)
 	{
 		ft_strncpy(buf, ptrctime + 4, 12);
 		buf[12] = 0;
@@ -83,12 +83,12 @@ void			print_filename(t_node *file, t_info *info)
 		if (S_ISLNK(file->statfile.st_mode))
 		{
 			readlink(file->path, buf, BUF_LINK_SIZE - 1);
-		//	ft_printf("%s%s\033[39m -> %s\n", tmp->color, filename, buf);
+			//	ft_printf("%s%s\033[39m -> %s\n", tmp->color, filename, buf);
 			ft_printf("%s -> %s\n", file->namtyp.d_name, buf);
 		}
 		else
 			ft_printf(/*%s%s*/"%s\n"/*\033[39m\033[49m\n",
-				tmp->background, tmp->color*/, file->namtyp.d_name);
+					tmp->background, tmp->color*/, file->namtyp.d_name);
 	}
 	else
 		ft_printf(/*%s%s*/"%s\n"/*\033[39m\033[49m\n",
@@ -97,18 +97,21 @@ void			print_filename(t_node *file, t_info *info)
 
 void			print_stat(t_node *file, t_info *info)
 {
-//	char		buf[4096];
+	//	char		buf[4096];
 
 	print_type_file(file->statfile);
 	print_mode_file(file->statfile);
-//	if (listxattr(dir->path, buf, 4096, XATTR_NOFOLLOW))
-//	   ft_putchar('@');	
+	//	if (listxattr(dir->path, buf, 4096, XATTR_NOFOLLOW))
+	//	   ft_putchar('@');	
 	ft_printf(" %*d ", info->maxlink, file->statfile.st_nlink);
 	ft_printf("%-*s  ", info->maxusr, getpwuid(file->statfile.st_uid)->pw_name);
-	ft_printf("%-*s  ", info->maxgrp, getgrgid(file->statfile.st_gid)->gr_name);
+	if (getgrgid(file->statfile.st_gid))
+		ft_printf("%-*s  ", info->maxgrp, getgrgid(file->statfile.st_gid)->gr_name);
+	else
+		ft_printf("%-*d  ", info->maxgrp, file->statfile.st_gid);
 	if (S_ISBLK(file->statfile.st_mode) || S_ISCHR(file->statfile.st_mode))
 		ft_printf("%*ld, %*ld ", info->maxmaj,
-			MAJOR(file->statfile.st_rdev), info->maxmin, MINOR(file->statfile.st_rdev));
+				MAJOR(file->statfile.st_rdev), info->maxmin, MINOR(file->statfile.st_rdev));
 	else
 		ft_printf("%*d ", info->maxoct, file->statfile.st_size);
 	print_time(file->statfile);
