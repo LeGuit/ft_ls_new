@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 11:35:16 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/05 12:19:52 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/05 14:16:06 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ static void		print_type_file(struct stat statfile)
 		ft_putchar('b');
 }
 
-static void		print_mode_file(struct stat statfile)
+static void		print_mode_file(struct stat statfile, t_node *file)
 {
 	char		buf[10];
+	char		bufxat[4096];
 
 	buf[0] = (statfile.st_mode & (S_IRUSR) ? 'r' : '-');
 	buf[1] = (statfile.st_mode & (S_IWUSR) ? 'w' : '-');
@@ -43,9 +44,17 @@ static void		print_mode_file(struct stat statfile)
 	buf[5] = (statfile.st_mode & (S_IXGRP) ? 'x' : '-');
 	buf[6] = (statfile.st_mode & (S_IROTH) ? 'r' : '-');
 	buf[7] = (statfile.st_mode & (S_IWOTH) ? 'w' : '-');
-	buf[8] = (statfile.st_mode & (S_IXOTH) ? 'x' : '-');
+	if (statfile.st_mode & (S_ISVTX))
+		buf[8] = 's';
+	else if (statfile.st_mode & (S_IXOTH))
+		buf[8] = 'x';
+	else
+		buf[8] = '-';
 	buf[9] = 0;
-	ft_printf("%s ", buf);
+	if (listxattr(file->path, bufxat, 4096, XATTR_NOFOLLOW))
+		ft_printf("%s@", buf);
+	else
+		ft_printf("%s ", buf);
 }
 
 static void		print_time(struct stat statfile)
@@ -56,8 +65,7 @@ static void		print_time(struct stat statfile)
 
 	ptrctime = ctime(&statfile.st_mtimespec.tv_sec);
 	time(&ltime);
-	if ((MAX(ltime, statfile.st_mtimespec.tv_sec)
-				- MIN(ltime, statfile.st_mtimespec.tv_sec)) < 1552000)
+	if (ABS(ltime - statfile.st_mtimespec.tv_sec) < 1552000)
 	{
 		ft_strncpy(buf, ptrctime + 4, 12);
 		buf[12] = 0;
@@ -97,12 +105,8 @@ void			print_filename(t_node *file, t_info *info)
 
 void			print_stat(t_node *file, t_info *info)
 {
-	//	char		buf[4096];
-
 	print_type_file(file->statfile);
-	print_mode_file(file->statfile);
-	//	if (listxattr(dir->path, buf, 4096, XATTR_NOFOLLOW))
-	//	   ft_putchar('@');	
+	print_mode_file(file->statfile, file);
 	ft_printf(" %*d ", info->maxlink, file->statfile.st_nlink);
 	ft_printf("%-*s  ", info->maxusr, getpwuid(file->statfile.st_uid)->pw_name);
 	if (getgrgid(file->statfile.st_gid))
