@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 11:52:34 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/08 17:12:16 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/08 17:36:33 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,15 @@ void			get_color(t_info *info, t_node *node)
 
 void			reset_max_info(t_info *info)
 {
-	info->maxlink = 0;
-	info->maxoct = 0;
-	info->maxusr = 0;
-	info->maxgrp = 0;
+	info->maxlink = 1;
+	info->maxoct = 1;
+	info->maxusr = 1;
+	info->maxgrp = 1;
 	info->total = 0;
-	info->maxmaj = 0;
-	info->maxmin = 0;
-	info->maxfile = 0;
-	info->line = 0;
-	info->col = 0;
-	info->nbfile = 0;
+	info->maxmaj = 1;
+	info->maxmin = 1;
+	info->maxfile = 1;
+	info->line = 1;
+	info->col = 1;
+	info->nbfile = 1;
 }

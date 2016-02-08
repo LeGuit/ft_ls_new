@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 18:43:24 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/08 12:21:58 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/08 18:34:17 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static void			ft_save(char *dirname, t_node *node, t_dlst *head)
 					+ ft_strlen(node->namtyp.d_name) + 2)))))
 		ft_error_malloc();
 	ft_strcpy(node->path, dirname);
-	ft_strcat(node->path, "/");
+	if (node->path[ft_strlen(node->path) - 1] != '/')
+		ft_strcat(node->path, "/");
 	ft_strcat(node->path, node->namtyp.d_name);
 	if (lstat(node->path, &node->statfile) == -1)
 		perror("ft_ls stat error: ");
@@ -52,7 +53,8 @@ void				ft_fetch_lst(DIR *dirp, char *filename, t_dlst *headfile,
 		if (!(nodefile = (t_node *)malloc(sizeof(t_node))))
 			ft_error_malloc();
 		nodefile->namtyp = *tmp;
-		if (nodefile->namtyp.d_type == DT_DIR
+		ft_save(filename, nodefile, headfile);
+		if (S_ISDIR(nodefile->statfile.st_mode)
 				&& ft_strcmp(".", nodefile->namtyp.d_name)
 				&& ft_strcmp("..", nodefile->namtyp.d_name))
 		{
@@ -61,6 +63,5 @@ void				ft_fetch_lst(DIR *dirp, char *filename, t_dlst *headfile,
 			nodedir->namtyp = *tmp;
 			ft_save(filename, nodedir, headdir);
 		}
-		ft_save(filename, nodefile, headfile);
 	}
 }
