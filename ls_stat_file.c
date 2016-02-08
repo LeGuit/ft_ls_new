@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 11:35:16 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/08 12:14:17 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/08 12:17:03 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void		print_mode_file(struct stat statfile, t_node *file)
 	else
 		buf[8] = '-';
 	buf[9] = 0;
-	if (listxattr(file->path, 0, 4096, 0) > 0)
+	if (listxattr(file->path, 0, 0, 0) > 0)
 		ft_printf("%s@", buf);
 	else
 		ft_printf("%s ", buf);
