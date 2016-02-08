@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 11:35:16 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/08 12:17:03 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/08 12:30:37 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,16 +92,13 @@ void			print_filename(t_node *file, t_info *info)
 		if (S_ISLNK(file->statfile.st_mode))
 		{
 			readlink(file->path, buf, BUF_LINK_SIZE - 1);
-			//	ft_printf("%s%s\033[39m -> %s\n", tmp->color, filename, buf);
 			ft_printf("%s -> %s\n", file->namtyp.d_name, buf);
 		}
 		else
-			ft_printf(/*%s%s*/"%s\n"/*\033[39m\033[49m\n",
-					tmp->background, tmp->color*/, file->namtyp.d_name);
+			ft_printf("%s\n", file->namtyp.d_name);
 	}
 	else
-		ft_printf(/*%s%s*/"%s\n"/*\033[39m\033[49m\n",
-				tmp->background, tmp->color*/, file->namtyp.d_name);
+		ft_printf("%s\n", file->namtyp.d_name);
 }
 
 void			print_stat(t_node *file, t_info *info)
@@ -110,16 +107,19 @@ void			print_stat(t_node *file, t_info *info)
 	print_mode_file(file->statfile, file);
 	ft_printf(" %*d ", info->maxlink, file->statfile.st_nlink);
 	if (getpwuid(file->statfile.st_uid))
-		ft_printf("%-*s  ", info->maxusr, getpwuid(file->statfile.st_uid)->pw_name);
+		ft_printf("%-*s  ", info->maxusr,
+				getpwuid(file->statfile.st_uid)->pw_name);
 	else
 		ft_printf("%-*d  ", info->maxusr, file->statfile.st_uid);
 	if (getgrgid(file->statfile.st_gid))
-		ft_printf("%-*s  ", info->maxgrp, getgrgid(file->statfile.st_gid)->gr_name);
+		ft_printf("%-*s  ", info->maxgrp,
+				getgrgid(file->statfile.st_gid)->gr_name);
 	else
 		ft_printf("%-*d  ", info->maxgrp, file->statfile.st_gid);
 	if (S_ISBLK(file->statfile.st_mode) || S_ISCHR(file->statfile.st_mode))
 		ft_printf("%*ld, %*ld ", info->maxmaj,
-				MAJOR(file->statfile.st_rdev), info->maxmin, MINOR(file->statfile.st_rdev));
+				MAJOR(file->statfile.st_rdev),
+				info->maxmin, MINOR(file->statfile.st_rdev));
 	else
 		ft_printf("%*d ", info->maxoct, file->statfile.st_size);
 	print_time(file->statfile);

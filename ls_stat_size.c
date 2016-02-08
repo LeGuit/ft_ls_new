@@ -6,25 +6,12 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 11:35:39 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/05 12:21:30 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/08 12:28:32 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 #include "libft/includes/libft.h"
-
-static int			size_nb(int nb)
-{
-	int				i;
-
-	i = 0;
-	while (nb)
-	{
-		i++;
-		nb /= 10;
-	}
-	return (i);
-}
 
 static void			ft_size_minmajoct(t_info *info)
 {
@@ -34,7 +21,7 @@ static void			ft_size_minmajoct(t_info *info)
 		info->maxmaj += (info->maxoct - (info->maxmaj + info->maxmin));
 }
 
-static size_t			ft_size_uid(uid_t uuid)
+static size_t		ft_size_uid(uid_t uuid)
 {
 	struct passwd	*getuid;
 
@@ -43,13 +30,21 @@ static size_t			ft_size_uid(uid_t uuid)
 	return (ft_strlen(getuid->pw_name));
 }
 
-static size_t			ft_size_gid(gid_t gid)
+static size_t		ft_size_gid(gid_t gid)
 {
 	struct group	*getgid;
 
 	if (!(getgid = getgrgid(gid)))
 		return (0);
 	return (ft_strlen(getgid->gr_name));
+}
+
+static void			ft_save_size(t_info *info)
+{
+	info->maxlink = ft_size_nb(info->maxlink);
+	info->maxoct = ft_size_nb(info->maxoct);
+	info->maxmaj = ft_size_nb(info->maxmaj);
+	info->maxmin = ft_size_nb(info->maxmin);
 }
 
 void				ft_size(t_info *info)
@@ -75,9 +70,6 @@ void				ft_size(t_info *info)
 		info->maxmin = MAX(info->maxmin, MINOR(tmp->statfile.st_rdev));
 		it = it->next;
 	}
-	info->maxlink = size_nb(info->maxlink);
-	info->maxoct = size_nb(info->maxoct);
-	info->maxmaj = size_nb(info->maxmaj);
-	info->maxmin = size_nb(info->maxmin);
+	ft_save_size(info);
 	ft_size_minmajoct(info);
 }
