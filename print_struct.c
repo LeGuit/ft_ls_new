@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 18:17:02 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/08 12:20:12 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/08 16:02:50 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,25 @@ void			print_files(t_info *info)
 	it = info->headfile.next;
 	if (GET(info->opt, OPT_L))
 		ft_printf("total %d\n", info->total);
-	while (it != &info->headfile)
+	if (GET(info->opt, OPT_L) || GET(info->opt, OPT_1))
 	{
-		tmp = C_NODE(t_node, it);
-		if (!GET(info->opt, OPT_A) && tmp->namtyp.d_name[0] == '.')
+		while (it != &info->headfile)
 		{
+			tmp = C_NODE(t_node, it);
+			if (!GET(info->opt, OPT_A) && tmp->namtyp.d_name[0] == '.')
+			{
+				it = it->next;
+				continue ;
+			}
+			if (GET(info->opt, OPT_L))
+				print_stat(tmp, info);
+			else
+				print_filename(tmp, info);
 			it = it->next;
-			continue ;
 		}
-		if (GET(info->opt, OPT_L))
-			print_stat(tmp, info);
-		else
-			print_filename(tmp, info);
-		it = it->next;
 	}
+	else
+		test_col_file(info);
 }
 
 void			print_info(t_info *info)

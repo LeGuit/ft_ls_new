@@ -6,7 +6,7 @@
 #    By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/12 16:35:07 by gwoodwar          #+#    #+#              #
-#    Updated: 2016/02/04 16:43:52 by gwoodwar         ###   ########.fr        #
+#    Updated: 2016/02/08 14:15:47 by gwoodwar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS =	ls_lst_dir.c \
 		ls_stat_size.c \
 		ls_tools.c \
 		ls_cmp.c \
+		ls_col_disp.c \
 		main.c
 
 OBJS =	$(SRCS:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 13:10:11 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/08 11:51:57 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/08 16:03:07 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@
 # define OPT_T				(1u << 4)
 # define OPT_G				(1u << 5)
 # define OPT_S				(1u << 6)
-# define OPT_ALL			((1u << 7) - 1)
+# define OPT_1				(1u << 7)
+# define OPT_ALL			((1u << 8) - 1)
 # define OPT_MD				(1u << 7)
 # define BUF_LINK_SIZE		128
 # define PATH_SIZE			4096
@@ -47,6 +48,10 @@ typedef struct		s_info
 	size_t			maxusr;
 	size_t			maxgrp;
 	size_t			total;
+	size_t			line;
+	size_t			nbfile;
+	size_t			maxfile;
+	size_t			col;
 	int				maxmaj;
 	int				maxmin;
 }					t_info;
@@ -57,6 +62,7 @@ typedef	struct		s_node
 	char			*path;
 	struct dirent	namtyp;
 	struct stat		statfile;
+	size_t			index;
 }					t_node;
 
 void				ft_get_dir(char *filename, t_info *info);
@@ -71,6 +77,7 @@ void				ft_exit_parse(char illopt);
 void				ft_error_dir(void);
 void				ft_error_malloc(void);
 void				print_files(t_info *info);
+void				test_col_file(t_info *info);
 void				print_stat(t_node *file, t_info *info);
 void				print_filename(t_node *tmp, t_info *info);
 void				get_color(t_info *info, t_node *node);

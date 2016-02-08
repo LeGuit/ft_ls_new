@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 11:35:39 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/08 12:28:32 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/08 14:24:23 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ void				ft_size(t_info *info)
 	t_dlst			*it;
 	size_t			sizeguid;
 
-	if (!GET(info->opt, OPT_L))
-		return ;
 	it = info->headfile.next;
 	while (it != &info->headfile)
 	{
@@ -68,6 +66,7 @@ void				ft_size(t_info *info)
 		info->maxgrp = MAX(info->maxgrp, sizeguid);
 		info->maxmaj = MAX(info->maxmaj, MAJOR(tmp->statfile.st_rdev));
 		info->maxmin = MAX(info->maxmin, MINOR(tmp->statfile.st_rdev));
+		info->maxfile = MAX(info->maxfile, ft_strlen(tmp->namtyp.d_name));
 		it = it->next;
 	}
 	ft_save_size(info);

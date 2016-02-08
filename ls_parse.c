@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 17:01:43 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/08 11:52:34 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/08 14:14:24 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int		invalid_opt(char option, t_info *info)
 {
-	if (!(ft_strchr("lRratGS", option)))
+	if (!(ft_strchr("lRratGS1", option)))
 		return (1);
 	if (option == 'l')
 		SET(info->opt, OPT_L);
@@ -30,6 +30,8 @@ static int		invalid_opt(char option, t_info *info)
 		SET(info->opt, OPT_G);
 	else if (option == 'S')
 		SET(info->opt, OPT_S);
+	else if (option == '1')
+		SET(info->opt, OPT_1);
 	return (0);
 }
 
