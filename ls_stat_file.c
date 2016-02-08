@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 11:35:16 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/08 12:30:37 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/08 16:34:16 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,33 +29,6 @@ static void		print_type_file(struct stat statfile)
 		ft_putchar('d');
 	else if (S_ISBLK(statfile.st_mode))
 		ft_putchar('b');
-}
-
-static void		print_mode_file(struct stat statfile, t_node *file)
-{
-	char		buf[10];
-
-	buf[0] = (statfile.st_mode & (S_IRUSR) ? 'r' : '-');
-	buf[1] = (statfile.st_mode & (S_IWUSR) ? 'w' : '-');
-	buf[2] = (statfile.st_mode & (S_IXUSR) ? 'x' : '-');
-	buf[3] = (statfile.st_mode & (S_IRGRP) ? 'r' : '-');
-	buf[4] = (statfile.st_mode & (S_IWGRP) ? 'w' : '-');
-	buf[5] = (statfile.st_mode & (S_IXGRP) ? 'x' : '-');
-	buf[6] = (statfile.st_mode & (S_IROTH) ? 'r' : '-');
-	buf[7] = (statfile.st_mode & (S_IWOTH) ? 'w' : '-');
-	if (statfile.st_mode & (S_ISVTX) && statfile.st_mode & (S_IXOTH))
-		buf[8] = 't';
-	else if (statfile.st_mode & (S_ISVTX))
-		buf[8] = 's';
-	else if (statfile.st_mode & (S_IXOTH))
-		buf[8] = 'x';
-	else
-		buf[8] = '-';
-	buf[9] = 0;
-	if (listxattr(file->path, 0, 0, 0) > 0)
-		ft_printf("%s@", buf);
-	else
-		ft_printf("%s ", buf);
 }
 
 static void		print_time(struct stat statfile)
