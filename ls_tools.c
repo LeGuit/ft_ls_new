@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 11:52:34 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/08 13:12:16 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/08 17:12:16 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,7 @@ void			reset_max_info(t_info *info)
 	info->maxmaj = 0;
 	info->maxmin = 0;
 	info->maxfile = 0;
+	info->line = 0;
+	info->col = 0;
+	info->nbfile = 0;
 }

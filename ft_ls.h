@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 13:10:11 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/08 16:35:01 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/08 17:16:42 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define OPT_S				(1u << 6)
 # define OPT_1				(1u << 7)
 # define OPT_ALL			((1u << 8) - 1)
-# define OPT_MD				(1u << 7)
+# define OPT_MD				(1u << 9)
 # define BUF_LINK_SIZE		128
 # define PATH_SIZE			4096
 # define MAJOR(dev)			((int)(((unsigned int)(dev) >> 24) & 0xFF))
