@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 18:17:02 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/08 16:02:50 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/08 19:24:16 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void			print_files(t_info *info)
 	t_dlst		*it;
 
 	it = info->headfile.next;
-	if (GET(info->opt, OPT_L))
+	if (GET(info->opt, OPT_L) && !dlst_empty(&info->headfile))
 		ft_printf("total %d\n", info->total);
 	if (GET(info->opt, OPT_L) || GET(info->opt, OPT_1))
 	{
