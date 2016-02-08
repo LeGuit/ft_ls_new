@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 13:10:11 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/08 11:33:50 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/08 11:51:57 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@
 # define OPT_A				(1u << 3)
 # define OPT_T				(1u << 4)
 # define OPT_G				(1u << 5)
-# define OPT_ALL			((1u << 6) - 1)
+# define OPT_S				(1u << 6)
+# define OPT_ALL			((1u << 7) - 1)
 # define OPT_MD				(1u << 7)
 # define BUF_LINK_SIZE		128
 # define PATH_SIZE			4096
@@ -75,6 +76,7 @@ void				print_filename(t_node *tmp, t_info *info);
 void				get_color(t_info *info, t_node *node);
 int					cmp_lexi(t_dlst *lsta, t_dlst *lstb);
 int					cmp_time(t_dlst *lsta, t_dlst *lstb);
+int					cmp_size(t_dlst *lsta, t_dlst *lstb);
 void				free_node(t_node *node);
 void				reset_max_info(t_info *info);
 

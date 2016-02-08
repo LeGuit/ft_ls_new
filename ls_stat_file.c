@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 11:35:16 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/05 14:22:51 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/08 12:14:17 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static void		print_type_file(struct stat statfile)
 static void		print_mode_file(struct stat statfile, t_node *file)
 {
 	char		buf[10];
-	char		bufxat[4096];
 
 	buf[0] = (statfile.st_mode & (S_IRUSR) ? 'r' : '-');
 	buf[1] = (statfile.st_mode & (S_IWUSR) ? 'w' : '-');
@@ -44,14 +43,16 @@ static void		print_mode_file(struct stat statfile, t_node *file)
 	buf[5] = (statfile.st_mode & (S_IXGRP) ? 'x' : '-');
 	buf[6] = (statfile.st_mode & (S_IROTH) ? 'r' : '-');
 	buf[7] = (statfile.st_mode & (S_IWOTH) ? 'w' : '-');
-	if (statfile.st_mode & (S_ISVTX))
+	if (statfile.st_mode & (S_ISVTX) && statfile.st_mode & (S_IXOTH))
+		buf[8] = 't';
+	else if (statfile.st_mode & (S_ISVTX))
 		buf[8] = 's';
 	else if (statfile.st_mode & (S_IXOTH))
 		buf[8] = 'x';
 	else
 		buf[8] = '-';
 	buf[9] = 0;
-	if (listxattr(file->path, bufxat, 4096, XATTR_NOFOLLOW))
+	if (listxattr(file->path, 0, 4096, 0) > 0)
 		ft_printf("%s@", buf);
 	else
 		ft_printf("%s ", buf);
@@ -108,7 +109,10 @@ void			print_stat(t_node *file, t_info *info)
 	print_type_file(file->statfile);
 	print_mode_file(file->statfile, file);
 	ft_printf(" %*d ", info->maxlink, file->statfile.st_nlink);
-	ft_printf("%-*s  ", info->maxusr, getpwuid(file->statfile.st_uid)->pw_name);
+	if (getpwuid(file->statfile.st_uid))
+		ft_printf("%-*s  ", info->maxusr, getpwuid(file->statfile.st_uid)->pw_name);
+	else
+		ft_printf("%-*d  ", info->maxusr, file->statfile.st_uid);
 	if (getgrgid(file->statfile.st_gid))
 		ft_printf("%-*s  ", info->maxgrp, getgrgid(file->statfile.st_gid)->gr_name);
 	else
