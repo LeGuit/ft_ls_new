@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 18:43:24 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/08 19:21:09 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/08 19:42:21 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ void				sort_merge_lst(t_dlst *head, t_info *info)
 
 static void			ft_save(char *dirname, t_node *node, t_dlst *head)
 {
+//	t_node			headerror;
+
+	dlst_init(&headerror);
 	if (!(node->path = (char *)malloc(sizeof(char)
 					* ((ft_strlen(dirname)
 					+ ft_strlen(node->namtyp.d_name) + 2)))))
@@ -35,6 +38,8 @@ static void			ft_save(char *dirname, t_node *node, t_dlst *head)
 		ft_strcat(node->path, "/");
 	ft_strcat(node->path, node->namtyp.d_name);
 	if (lstat(node->path, &node->statfile) == -1)
+//	{
+//		dlst_add_tail(&node->dlst, headderror);
 		ft_error_dir(node->namtyp.d_name);
 	else
 		dlst_add_tail(&node->dlst, head);
