@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 16:58:29 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/05 11:27:46 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/08 11:09:25 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,12 @@ int				main(int ac, char **av)
 	info_init(&info);
 	if (ac == 1)
 		ft_get_dir(".", &info);
-	i = parse_opt(av[1], &info) + 1;
-	if (ac == 2 && i == 2)
+	i = 1;
+	while (parse_opt(av[i], &info))
+		i++;
+	if (ft_strequ(av[i], "--"))
+		i++;
+	if (ac == i)
 		ft_get_dir(".", &info);
 	else
 	{
