@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 13:10:11 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/04 19:27:54 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/08 11:33:50 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void				print_stat(t_node *file, t_info *info);
 void				print_filename(t_node *tmp, t_info *info);
 void				get_color(t_info *info, t_node *node);
 int					cmp_lexi(t_dlst *lsta, t_dlst *lstb);
-int					cmp_lexi_rev(t_dlst *lsta, t_dlst *lstb);
 int					cmp_time(t_dlst *lsta, t_dlst *lstb);
 void				free_node(t_node *node);
 void				reset_max_info(t_info *info);

@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 18:43:24 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/08 10:08:04 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/08 11:25:09 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 void				sort_merge_lst(t_dlst *head, t_info *info)
 {
-	if (GET(info->opt, OPT_R))
-		dlst_merge_sort(head, cmp_lexi_rev);
-	else if (GET(info->opt, OPT_T))
+//	if (GET(info->opt, OPT_R))
+//		dlst_merge_sort(head, cmp_lexi_rev);
+	if (GET(info->opt, OPT_T))
 		dlst_merge_sort(head, cmp_time);
 	else
 		dlst_merge_sort(head, cmp_lexi);
+	if (GET(info->opt, OPT_R))
+		dlst_rev(head);
 }
 
 static void			ft_save(char *dirname, t_node *node, t_dlst *head)
