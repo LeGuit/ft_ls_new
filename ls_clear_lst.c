@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 18:48:13 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/05 11:50:12 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/08 21:52:47 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,17 @@ void				clear_head(t_dlst *head)
 		it = head->next;
 	}
 	dlst_init(head);
+}
+
+void				clear_tab(char **tab)
+{
+	int				i;
+
+	i = 0;
+	while (tab[i] != 0)
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
 }

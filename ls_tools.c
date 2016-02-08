@@ -6,41 +6,70 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 11:52:34 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/08 17:36:33 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/08 21:47:45 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
 /*
-void			get_color(t_info *info, t_node *node)
+   void			get_color(t_info *info, t_node *node)
+   {
+   ft_strcpy(node->color, C_RES);
+   if (!GET(info->opt, OPT_G))
+   return ;
+   if (S_ISSOCK(node->statfile.st_mode))
+   ft_putchar('s');
+   else if (S_ISLNK(node->statfile.st_mode))
+   ft_strcpy(node->color, C_MAG);
+   else if (S_ISFIFO(node->statfile.st_mode))
+   ft_strcpy(node->color, C_YEL);
+   else if (S_ISCHR(node->statfile.st_mode))
+   ft_strcpy(node->color, C_BLU);
+   else if (S_ISDIR(node->statfile.st_mode))
+   ft_strcpy(node->color, C_LCYA);
+   else if (S_ISBLK(node->statfile.st_mode))
+   ft_strcpy(node->color, C_BLU);
+   else if (node->statfile.st_mode & S_IXUSR
+   && node->statfile.st_mode & S_IXGRP
+   && node->statfile.st_mode & S_IXOTH)
+   ft_strcpy(node->color, C_RED);
+   ft_strcpy(node->background, B_RES);
+   if (S_ISCHR(node->statfile.st_mode))
+   ft_strcpy(node->background, C_BLU);
+   else if (S_ISBLK(node->statfile.st_mode))
+   ft_strcpy(node->background, C_BLU);
+   }
+   */
+
+void			sort_tab(char **tab)
 {
-	ft_strcpy(node->color, C_RES);
-	if (!GET(info->opt, OPT_G))
-		return ;
-	if (S_ISSOCK(node->statfile.st_mode))
-		ft_putchar('s');
-	else if (S_ISLNK(node->statfile.st_mode))
-		ft_strcpy(node->color, C_MAG);
-	else if (S_ISFIFO(node->statfile.st_mode))
-		ft_strcpy(node->color, C_YEL);
-	else if (S_ISCHR(node->statfile.st_mode))
-		ft_strcpy(node->color, C_BLU);
-	else if (S_ISDIR(node->statfile.st_mode))
-		ft_strcpy(node->color, C_LCYA);
-	else if (S_ISBLK(node->statfile.st_mode))
-		ft_strcpy(node->color, C_BLU);
-	else if (node->statfile.st_mode & S_IXUSR
-			&& node->statfile.st_mode & S_IXGRP
-			&& node->statfile.st_mode & S_IXOTH)
-		ft_strcpy(node->color, C_RED);
-	ft_strcpy(node->background, B_RES);
-	if (S_ISCHR(node->statfile.st_mode))
-		ft_strcpy(node->background, C_BLU);
-	else if (S_ISBLK(node->statfile.st_mode))
-		ft_strcpy(node->background, C_BLU);
+	char		*tmp;
+	int			j;
+	int			i;
+	int			size;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	size = i;
+	i = 0;
+	while (i < size)
+	{
+		j = i + 1;
+		while (j < size)
+		{
+			if (ft_strcmp(tab[i], tab[j]) > 0)
+			{
+				tmp = tab[i];
+				tab[i] = tab[j];
+				tab[j] = tmp;
+			}
+			j++;
+		}
+		i++;
+	}
 }
-*/
 
 void			reset_max_info(t_info *info)
 {

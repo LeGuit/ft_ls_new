@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 13:10:11 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/08 19:54:06 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/08 21:55:57 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@
 # define OPT_S				(1u << 6)
 # define OPT_1				(1u << 7)
 # define OPT_ALL			((1u << 8) - 1)
-# define OPT_MD				(1u << 9)
 # define BUF_LINK_SIZE		128
 # define PATH_SIZE			4096
 # define MAJOR(dev)			((int)(((unsigned int)(dev) >> 24) & 0xFF))
@@ -65,10 +64,12 @@ typedef	struct		s_node
 	size_t			index;
 }					t_node;
 
+void				ft_ls(int ac, char **av, int i, t_info *info);
 void				ft_get_dir(char *filename, t_info *info);
 void				ft_fetch_lst(DIR *dirp, char *filename, t_dlst *headfile,
 					t_dlst *headdir);
 void				clear_head(t_dlst *head);
+void				clear_tab(char **tab);
 void				sort_merge_lst(t_dlst *head, t_info *info);
 int					parse_opt(char *av, t_info *info);
 void				ft_size(t_info *info);
@@ -86,8 +87,10 @@ int					cmp_time(t_dlst *lsta, t_dlst *lstb);
 int					cmp_size(t_dlst *lsta, t_dlst *lstb);
 void				free_node(t_node *node);
 void				reset_max_info(t_info *info);
+void				sort_tab(char **tab);
 void				print_mode_file(struct stat statfile,
 					t_node *file);
+void				print_rfiles(char **tab);
 
 //DEBUG
 void				print_info(t_info *info);
