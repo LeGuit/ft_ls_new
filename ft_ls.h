@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 13:10:11 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/08 17:30:00 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/08 18:57:54 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int					parse_opt(char *av, t_info *info);
 void				ft_size(t_info *info);
 void				ft_padding(t_info *info);
 void				ft_exit_parse(char illopt);
-void				ft_error_dir(void);
+void				ft_error_dir(char *illdir);
 void				ft_error_malloc(void);
 void				print_files(t_info *info);
 void				test_col_file(t_info *info);

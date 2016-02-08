@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 16:16:16 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/05 11:36:55 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/08 18:57:24 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void				ft_get_dir(char *filename, t_info *info)
 	reset_max_info(info);
 	dlst_init(&headdir);
 	if (!(dirp = opendir(filename)))
-		ft_error_dir();
+		ft_error_dir(filename);
 	else
 	{
 		ft_fetch_lst(dirp, filename, &info->headfile, &headdir);
