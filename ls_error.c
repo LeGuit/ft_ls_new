@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 18:20:19 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/08 19:17:51 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/08 19:54:50 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,20 @@ void			ft_error_malloc(void)
 {
 	perror("ft_ls: ");
 	exit(0);
+}
+
+void			flush_headerror(t_dlst *headerror)
+{
+	t_dlst		*it;
+	t_node		*tmp;
+
+	dlst_merge_sort(headerror, cmp_lexi);
+	it = headerror->next;
+	while (it != headerror)
+	{
+		tmp = C_NODE(t_node, it);
+		ft_error_dir(tmp->namtyp.d_name);
+		it = it->next;
+	}
+	clear_head(headerror);
 }

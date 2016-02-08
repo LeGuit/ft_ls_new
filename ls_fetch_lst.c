@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 18:43:24 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/08 19:42:21 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/08 19:54:24 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,9 @@ void				sort_merge_lst(t_dlst *head, t_info *info)
 		dlst_rev(head);
 }
 
-static void			ft_save(char *dirname, t_node *node, t_dlst *head)
+static void			ft_save(char *dirname, t_node *node, t_dlst *head,
+					t_dlst *headerror)
 {
-//	t_node			headerror;
-
-	dlst_init(&headerror);
 	if (!(node->path = (char *)malloc(sizeof(char)
 					* ((ft_strlen(dirname)
 					+ ft_strlen(node->namtyp.d_name) + 2)))))
@@ -38,9 +36,7 @@ static void			ft_save(char *dirname, t_node *node, t_dlst *head)
 		ft_strcat(node->path, "/");
 	ft_strcat(node->path, node->namtyp.d_name);
 	if (lstat(node->path, &node->statfile) == -1)
-//	{
-//		dlst_add_tail(&node->dlst, headderror);
-		ft_error_dir(node->namtyp.d_name);
+		dlst_add_tail(&node->dlst, headerror);
 	else
 		dlst_add_tail(&node->dlst, head);
 }
@@ -50,8 +46,10 @@ void				ft_fetch_lst(DIR *dirp, char *filename, t_dlst *headfile,
 {
 	t_node			*nodefile;
 	t_node			*nodedir;
+	t_dlst			headerror;
 	struct dirent	*tmp;
 
+	dlst_init(&headerror);
 	while ((tmp = readdir(dirp)))
 	{
 		if (tmp->d_name[0] == '.' && !GET(C_NODE(t_info, headfile)->opt, OPT_A))
@@ -59,7 +57,7 @@ void				ft_fetch_lst(DIR *dirp, char *filename, t_dlst *headfile,
 		if (!(nodefile = (t_node *)malloc(sizeof(t_node))))
 			ft_error_malloc();
 		nodefile->namtyp = *tmp;
-		ft_save(filename, nodefile, headfile);
+		ft_save(filename, nodefile, headfile, &headerror);
 		if (S_ISDIR(nodefile->statfile.st_mode)
 				&& ft_strcmp(".", nodefile->namtyp.d_name)
 				&& ft_strcmp("..", nodefile->namtyp.d_name))
@@ -67,7 +65,8 @@ void				ft_fetch_lst(DIR *dirp, char *filename, t_dlst *headfile,
 			if (!(nodedir = (t_node *)malloc(sizeof(t_node))))
 				ft_error_malloc();
 			nodedir->namtyp = *tmp;
-			ft_save(filename, nodedir, headdir);
+			ft_save(filename, nodedir, headdir, &headerror);
 		}
 	}
+	flush_headerror(&headerror);
 }

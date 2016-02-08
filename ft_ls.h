@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 13:10:11 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/08 18:57:54 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/08 19:54:06 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void				ft_error_malloc(void);
 void				print_files(t_info *info);
 void				test_col_file(t_info *info);
 void				print_stat(t_node *file, t_info *info);
+void				flush_headerror(t_dlst *headerror);
 void				print_filename(t_node *tmp, t_info *info);
 int					cmp_lexi(t_dlst *lsta, t_dlst *lstb);
 int					cmp_time(t_dlst *lsta, t_dlst *lstb);
