@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/09 09:20:53 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/09 11:15:16 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/09 11:29:03 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,20 @@ static void		launch_dir_lst(t_dlst *headdir, t_info *info)
 	while (it != headdir)
 	{
 		tmp = C_NODE(t_node, it);
-		if (it != headdir->next)
-			ft_printf("\n%s:\n", tmp->namtyp.d_name);
-		else
-			ft_printf("%s:\n", tmp->namtyp.d_name);
+		if (!dlst_is_singular(headdir))
+		{
+			if (it != headdir->next)
+				ft_printf("\n%s:\n", tmp->namtyp.d_name);
+			else
+				ft_printf("%s:\n", tmp->namtyp.d_name);
+		}
 		ft_get_dir(tmp->path, info);
 		it = it->next;
 	}
 	clear_head(headdir);
 }
 
-static void		print_args(t_info *info)
+static void		print_args(t_info *info, t_dlst *headdir)
 {
 	t_node		*tmp;
 	t_dlst		*it;
@@ -78,7 +81,8 @@ static void		print_args(t_info *info)
 	}
 	else
 		test_col_file(info);
-	ft_putchar('\n');
+	if (!dlst_empty(headdir))
+		ft_putchar('\n');
 }
 
 void			ft_ls(int ac, char **av, int i, t_info *info)
@@ -102,7 +106,7 @@ void			ft_ls(int ac, char **av, int i, t_info *info)
 	if (!dlst_empty(&info->headfile))
 	{
 		sort_merge_lst(&info->headfile, info);
-		print_args(info);
+		print_args(info, &headdir);
 	}
 	launch_dir_lst(&headdir, info);
 }

@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 16:58:29 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/08 21:55:24 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/09 11:25:59 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int				main(int ac, char **av)
 		i++;
 	if (ac == i)
 		ft_get_dir(".", &info);
+//	else if (ac - i == 1)
+//		ft_get_dir(av[i], &info);
 	else
 		ft_ls(ac, av, i, &info);/*
 		save_sort_av(av, ac, i);

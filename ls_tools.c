@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 11:52:34 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/09 09:44:32 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/09 11:33:33 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void			reset_max_info(t_info *info)
 	info->maxusr = 1;
 	info->maxgrp = 1;
 	info->total = 0;
-	info->maxmaj = 1;
-	info->maxmin = 1;
+	info->maxmaj = 0;
+	info->maxmin = 0;
 	info->maxfile = 1;
 	info->line = 1;
 	info->col = 1;
