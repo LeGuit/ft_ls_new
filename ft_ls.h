@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 13:10:11 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/09 10:26:45 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/09 13:09:16 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct		s_info
 	size_t			col;
 	int				maxmaj;
 	int				maxmin;
+	int				flush;
 }					t_info;
 
 typedef	struct		s_node

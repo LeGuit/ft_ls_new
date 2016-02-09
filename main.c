@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 16:58:29 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/09 12:46:09 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/09 13:08:49 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void		info_init(t_info *info)
 {
 	UNSET(info->opt, OPT_ALL);
 	dlst_init(&info->headfile);
+	info->flush = 0;
 }
 
 int				main(int ac, char **av)
@@ -31,20 +32,7 @@ int				main(int ac, char **av)
 		i++;
 	if (ac == i)
 		ft_get_dir(".", &info);
-//	else if (ac - i == 1)
-//		ft_get_dir(av[i], &info);
 	else
-		ft_ls(ac, av, i, &info);/*
-		save_sort_av(av, ac, i);
-		SET(info.opt, OPT_MD);
-		while (i < ac)
-		{
-			ft_putstr(av[i]);
-			ft_putstr(":\n");
-			ft_get_dir(av[i], &info);
-			i++;
-			if (i != ac)
-				ft_putchar('\n');
-		}*/
+		ft_ls(ac, av, i, &info);
 	return (0);
 }

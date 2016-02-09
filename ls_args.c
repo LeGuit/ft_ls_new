@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/09 09:20:53 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/09 12:40:32 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/09 13:09:12 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void		launch_dir_lst(t_dlst *headdir, t_info *info)
 	while (it != headdir)
 	{
 		tmp = C_NODE(t_node, it);
-		if (!dlst_is_singular(headdir))
+		if (!dlst_is_singular(headdir) || info->flush)
 		{
 			if (it != headdir->next)
 				ft_printf("\n%s:\n", tmp->namtyp.d_name);
@@ -102,7 +102,10 @@ void			ft_ls(int ac, char **av, int i, t_info *info)
 		i++;
 	}
 	if (!dlst_empty(&headerror))
+	{
 		flush_headerror(&headerror);
+		info->flush = 1;
+	}
 	if (!dlst_empty(&info->headfile))
 	{
 		sort_merge_lst(&info->headfile, info);
