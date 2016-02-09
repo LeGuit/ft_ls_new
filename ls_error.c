@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 18:20:19 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/09 12:40:40 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/09 12:56:27 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void			ft_exit_parse(char illopt)
 {
-	ft_putstr_fd("ft_ls : illegal option -- ", 2);
+	ft_putstr_fd("ft_ls: illegal option -- ", 2);
 	ft_putchar_fd(illopt, 2);
 	ft_putstr_fd("\nusage: ft_ls [-l1SRrat] [file ...]\n", 2);
 	exit(0);
@@ -42,7 +42,8 @@ void			ft_error_dir(char *illdir)
 	}
 	else
 		ft_putstr_fd(illdir, 2);
-	perror(" ");
+	ft_putstr_fd(": ", 2);
+	perror("");
 }
 
 void			ft_error_malloc(void)
