@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/09 09:20:53 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/09 10:53:27 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/09 11:15:16 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ static void		launch_dir_lst(t_dlst *headdir, t_info *info)
 	sort_merge_lst(headdir, info);
 	it = headdir->next;
 	tmp = C_NODE(t_node, it);
-	if (!dlst_empty(&info->headfile))
-		ft_printf("%s:\n", tmp->namtyp.d_name);
 	clear_head(&info->headfile);
 	while (it != headdir)
 	{
