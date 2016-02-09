@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/09 09:20:53 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/09 10:14:08 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/09 10:31:32 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static void		launch_dir_lst(t_dlst *headdir, t_info *info)
 		tmp = C_NODE(t_node, it);
 		ft_get_dir(tmp->path, info);
 		it = it->next;
+		if (GET(info->opt, OPT_MD) && it != headdir)
+			ft_printf("\n%s\n:", C_NODE(t_node, it)->namtyp.d_name);
 	}
 	clear_head(headdir);
 }
@@ -88,6 +90,8 @@ void			ft_ls(int ac, char **av, int i, t_info *info)
 	dlst_init(&headerror);
 	dlst_init(&info->headfile);
 	reset_max_info(info);
+	if (ac - 1 > 1)
+		SET(info->opt, OPT_MD);
 	while (i < ac)
 	{
 		ls_fetch_in_arg(av[i], &info->headfile, &headdir, &headerror);
