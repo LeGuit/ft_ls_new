@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 11:35:16 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/08 16:34:16 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/09 12:30:02 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,27 @@ static void		print_type_file(struct stat statfile)
 		ft_putchar('b');
 }
 
+static void		print_year(struct stat statfile)
+{
+	char		buf[19];
+	char		*ptrctime;
+
+	ptrctime = ctime(&statfile.st_mtimespec.tv_sec);
+	if ((int)statfile.st_mtimespec.tv_sec > 0)
+	{
+		ft_strncpy(buf, ptrctime + 4, 7);
+		buf[7] = ' ';
+		buf[8] = 0;
+		ft_strncat(buf, ptrctime + 20, 4);
+		buf[12] = 0;
+	}
+	else
+	{
+		ft_strcpy(buf, "Jan  1  10000\0");
+	}
+	ft_printf("%s ", buf);
+}
+
 static void		print_time(struct stat statfile)
 {
 	char		buf[19];
@@ -39,20 +60,23 @@ static void		print_time(struct stat statfile)
 
 	ptrctime = ctime(&statfile.st_mtimespec.tv_sec);
 	time(&ltime);
-	if (ABS(ltime - statfile.st_mtimespec.tv_sec) < 1552000)
+	if (ABS(ltime - statfile.st_mtimespec.tv_sec) < 1552000
+			&& statfile.st_mtimespec.tv_sec > 0)
 	{
 		ft_strncpy(buf, ptrctime + 4, 12);
 		buf[12] = 0;
+		ft_printf("%s ", buf);
 	}
 	else
-	{
+		print_year(statfile);
+/*	{
 		ft_strncpy(buf, ptrctime + 4, 7);
 		buf[7] = ' ';
 		buf[8] = 0;
 		ft_strncat(buf, ptrctime + 20, 4);
 		buf[12] = 0;
 	}
-	ft_printf("%s ", buf);
+	ft_printf("%s ", buf);*/
 }
 
 void			print_filename(t_node *file, t_info *info)

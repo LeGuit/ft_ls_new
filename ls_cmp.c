@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 16:43:41 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/08 12:18:34 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/09 12:16:40 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int				cmp_time(t_dlst *lsta, t_dlst *lstb)
 
 	noda = C_NODE(t_node, lsta);
 	nodb = C_NODE(t_node, lstb);
+	if (noda->statfile.st_mtimespec.tv_sec < 0)
+		return (1);
 	if (noda->statfile.st_mtimespec.tv_sec
 			== nodb->statfile.st_mtimespec.tv_sec)
 		return (ft_strcmp(noda->namtyp.d_name, nodb->namtyp.d_name));
