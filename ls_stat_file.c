@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 11:35:16 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/09 13:21:39 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/09 14:00:30 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void		print_time(struct stat statfile)
 
 	ptrctime = ctime(&statfile.st_mtimespec.tv_sec);
 	time(&ltime);
-	if (ABS(ltime - statfile.st_mtimespec.tv_sec) < 1552000
+	if (ABS(ltime - statfile.st_mtimespec.tv_sec) < 15552000
 			&& statfile.st_mtimespec.tv_sec > 0)
 	{
 		ft_strncpy(buf, ptrctime + 4, 12);
