@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 18:17:02 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/08 21:59:20 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/09 09:44:08 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,6 @@ void			print_files(t_info *info)
 	}
 	else
 		test_col_file(info);
-}
-
-void			print_rfiles(char **tab)
-{
-	int			i;
-
-	i = 0;
-	while (tab[i] != 0)
-	{
-		ft_putendl(tab[i]);
-		i++;
-	}
-	if (tab[0])
-		ft_putchar('\n');
 }
 
 void			print_info(t_info *info)

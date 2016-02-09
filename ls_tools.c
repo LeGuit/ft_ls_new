@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/20 11:52:34 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/08 21:47:45 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/09 09:44:32 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,35 +41,6 @@
    ft_strcpy(node->background, C_BLU);
    }
    */
-
-void			sort_tab(char **tab)
-{
-	char		*tmp;
-	int			j;
-	int			i;
-	int			size;
-
-	i = 0;
-	while (tab[i])
-		i++;
-	size = i;
-	i = 0;
-	while (i < size)
-	{
-		j = i + 1;
-		while (j < size)
-		{
-			if (ft_strcmp(tab[i], tab[j]) > 0)
-			{
-				tmp = tab[i];
-				tab[i] = tab[j];
-				tab[j] = tmp;
-			}
-			j++;
-		}
-		i++;
-	}
-}
 
 void			reset_max_info(t_info *info)
 {
