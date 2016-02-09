@@ -6,11 +6,30 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/09 09:20:53 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/09 13:09:12 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/09 13:45:50 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+static int		case_sl_file(t_node *node)
+{
+	char		buf[BUF_LINK_SIZE];
+
+	ft_bzero(buf, BUF_LINK_SIZE);
+	readlink(node->path, buf, BUF_LINK_SIZE - 1);
+	lstat(buf, &node->statfile);
+	if (S_ISDIR(node->statfile.st_mode))
+	{
+		lstat(node->path, &node->statfile);
+		return (0);
+	}
+	else
+	{
+		lstat(node->path, &node->statfile);
+		return (1);
+	}
+}
 
 static void		ls_fetch_in_arg(char *filename, t_dlst *headfile,
 		t_dlst *headdir, t_dlst *headerror)
@@ -27,6 +46,8 @@ static void		ls_fetch_in_arg(char *filename, t_dlst *headfile,
 		dlst_add_tail(&node->dlst, headerror);
 	else if (S_ISREG(node->statfile.st_mode))
 		dlst_add_tail(&node->dlst, headfile);
+	else if (S_ISLNK(node->statfile.st_mode) && case_sl_file(node))
+		dlst_add_tail(&node->dlst, headfile);
 	else
 		dlst_add_tail(&node->dlst, headdir);
 }
@@ -36,22 +57,25 @@ static void		launch_dir_lst(t_dlst *headdir, t_info *info)
 	t_dlst		*it;
 	t_node		*tmp;
 
-	sort_merge_lst(headdir, info);
-	it = headdir->next;
-	tmp = C_NODE(t_node, it);
-	clear_head(&info->headfile);
-	while (it != headdir)
+	if (!dlst_empty(headdir))
 	{
+		sort_merge_lst(headdir, info);
+		it = headdir->next;
 		tmp = C_NODE(t_node, it);
-		if (!dlst_is_singular(headdir) || info->flush)
+		clear_head(&info->headfile);
+		while (it != headdir)
 		{
-			if (it != headdir->next)
-				ft_printf("\n%s:\n", tmp->namtyp.d_name);
-			else
-				ft_printf("%s:\n", tmp->namtyp.d_name);
+			tmp = C_NODE(t_node, it);
+			if (!dlst_is_singular(headdir) || info->flush)
+			{
+				if (it != headdir->next)
+					ft_printf("\n%s:\n", tmp->namtyp.d_name);
+				else
+					ft_printf("%s:\n", tmp->namtyp.d_name);
+			}
+			ft_get_dir(tmp->path, info);
+			it = it->next;
 		}
-		ft_get_dir(tmp->path, info);
-		it = it->next;
 	}
 	clear_head(headdir);
 }

@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/19 11:35:16 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/09 12:30:02 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/09 13:21:39 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,6 @@ static void		print_time(struct stat statfile)
 	}
 	else
 		print_year(statfile);
-/*	{
-		ft_strncpy(buf, ptrctime + 4, 7);
-		buf[7] = ' ';
-		buf[8] = 0;
-		ft_strncat(buf, ptrctime + 20, 4);
-		buf[12] = 0;
-	}
-	ft_printf("%s ", buf);*/
 }
 
 void			print_filename(t_node *file, t_info *info)
