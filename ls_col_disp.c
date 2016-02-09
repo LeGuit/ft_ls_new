@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/08 12:59:04 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/08 17:26:57 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/09 10:19:06 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void				get_winsize(t_info *info)
 		print_files(info);
 		UNSET(info->opt, OPT_1);
 	}
-	info->line = info->nbfile / info->col;
+	info->line = MAX(info->nbfile / info->col, 1);
 	if (info->nbfile % info->maxfile)
 		info->line++;
 }

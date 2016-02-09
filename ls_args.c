@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/09 09:20:53 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/09 10:12:46 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/09 10:14:08 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void		ls_fetch_in_arg(char *filename, t_dlst *headfile,
 
 	if (!(node = (t_node *)malloc(sizeof(t_node))))
 		ft_error_malloc();
-	ft_strcpy(node->namtyp.d_name, filename); 
+	ft_strcpy(node->namtyp.d_name, filename);
 	if (!(node->path = (char *)malloc(sizeof(char) * ft_strlen(filename) + 1)))
 		ft_error_malloc();
 	ft_strcpy(node->path, filename);
@@ -40,7 +40,7 @@ static void		launch_dir_lst(t_dlst *headdir, t_info *info)
 	it = headdir->next;
 	tmp = C_NODE(t_node, it);
 	if (!dlst_empty(&info->headfile))
-		ft_printf("%s:\n",tmp->namtyp.d_name);
+		ft_printf("%s:\n", tmp->namtyp.d_name);
 	clear_head(&info->headfile);
 	while (it != headdir)
 	{
@@ -53,8 +53,8 @@ static void		launch_dir_lst(t_dlst *headdir, t_info *info)
 
 static void		print_args(t_info *info)
 {
-	t_node      *tmp;
-	t_dlst      *it;
+	t_node		*tmp;
+	t_dlst		*it;
 
 	it = info->headfile.next;
 	if (GET(info->opt, OPT_L) || GET(info->opt, OPT_1))
