@@ -6,7 +6,7 @@
 #    By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/12 16:35:07 by gwoodwar          #+#    #+#              #
-#    Updated: 2016/02/08 21:56:24 by gwoodwar         ###   ########.fr        #
+#    Updated: 2016/02/09 09:59:39 by gwoodwar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRCS =	ls_lst_dir.c \
 		ls_cmp.c \
 		ls_col_disp.c \
 		ls_mode_file.c \
-		ls_first_sort.c \
+		ls_args.c \
 		main.c
 
 OBJS =	$(SRCS:.c=.o)
