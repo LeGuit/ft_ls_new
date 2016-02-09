@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/08 12:59:04 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/09 10:19:06 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/09 10:49:17 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ static void				print_col_file(t_info *info)
 			}
 			it = it->next;
 		}
-		ft_putchar('\n');
+		if (line != info->line)
+			ft_putchar('\n');
 		it = info->headfile.next;
 	}
 }

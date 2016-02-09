@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 17:01:43 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/08 16:59:49 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/09 10:36:13 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ int				parse_opt(char *av, t_info *info)
 		return (0);
 	if (av[0] != '-')
 		return (0);
-	if (av[0] == '-' && av[1] == '\0')
-		return (0);
 	if (ft_strequ(av, "--"))
+		return (0);
+	if (av[0] == '-' && av[1] == '\0')
 		return (0);
 	i = 1;
 	while (i < ft_strlen(av))
