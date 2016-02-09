@@ -6,7 +6,7 @@
 /*   By: gwoodwar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/09 09:20:53 by gwoodwar          #+#    #+#             */
-/*   Updated: 2016/02/09 11:29:03 by gwoodwar         ###   ########.fr       */
+/*   Updated: 2016/02/09 12:40:32 by gwoodwar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void		ls_fetch_in_arg(char *filename, t_dlst *headfile,
 	ft_strcpy(node->path, filename);
 	if (lstat(node->path, &node->statfile) == -1)
 		dlst_add_tail(&node->dlst, headerror);
-	if (S_ISREG(node->statfile.st_mode))
+	else if (S_ISREG(node->statfile.st_mode))
 		dlst_add_tail(&node->dlst, headfile);
 	else
 		dlst_add_tail(&node->dlst, headdir);
